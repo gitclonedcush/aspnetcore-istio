@@ -17,7 +17,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: grade-service-v1
+  name: grade-service
 spec:
   replicas: 1
   template:
@@ -32,4 +32,22 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
+---
+###########################################################################
+# Ingress resource (gateway)
+##########################################################################
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api/grades
+        backend:
+          serviceName: grade-service 
+          servicePort: 8080
 ---
