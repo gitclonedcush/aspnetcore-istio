@@ -1,0 +1,35 @@
+#################################################################################################
+# Grade service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: grade-service 
+  labels:
+    app: grade-service 
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: grade-service 
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grade-service-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grade-service 
+        version: v1
+    spec:
+      containers:
+      - name: grade-service 
+        image: grade-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+---
