@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+  creationTimestamp: null
+  name: grade-service
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: grade-service
+    spec:
+      containers:
+      - name: grade-service 
+        image: grade-service:v1
+        resources: {}
+        imagePullPolicy: Never
+        ports: [ 
+          { 
+            containerPort: 8080, 
+            protocol: TCP
+          }
+        ]
+      restartPolicy: Always
+status: {}
