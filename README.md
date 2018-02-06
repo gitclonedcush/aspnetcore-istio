@@ -10,4 +10,4 @@
   * This will create a grade service deployment, service, and ingress
 * Get the ingress/gateway ip using ```export GATEWAY_URL=$(kubectl get po -l istio=ingress -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingress -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')```
 * Request grades at ```$GATEWAY_URL/api/grades```
-* Cleanup with bash ./cleanup.sh
+* Cleanup with ```bash ./cleanup.sh```
